@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My One and Only Babi 💌</title>
+
+<!-- Elegant romantic font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Quicksand&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0E0E68,#033f62);
+font-family:'Quicksand', sans-serif;
+overflow:hidden;
+}
+
+/* Floating hearts */
+
+.heart{
+position:absolute;
+animation:float linear infinite;
+opacity:0.7;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
+}
+
+/* Love letter card */
+
+.card{
+background:#fffdfc;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,0.15);
+text-align:center;
+max-width:90%;
+animation:open 1s ease;
+}
+
+@keyframes open{
+from{transform:scale(0.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+h1{
+font-family:'Playfair Display', serif;
+color:#9d2559;
+font-size:clamp(24px,5vw,34px);
+}
+
+/* Buttons */
+
+button{
+padding:14px 24px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+transition:0.2s;
+}
+
+#yesBtn{
+background:#e5989b;
+color:white;
+}
+
+#noBtn{
+background:#eee;
+position:absolute;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+<h1 id="text"></h1>
+
+<button id="yesBtn">YES 💗</button>
+</div>
+
+<button id="noBtn">NO? 🙈</button>
+
+<script>
+
+/* Romantic typing message (Laufey-style soft confession vibe) */
+
+const message =
+"HI Sanu.. I know it is late yo banauna dhilo vayo But                                                                           WILL YOU BE MY FOREEVER VALENTINE?";
+
+let i=0;
+
+function typeWriter(){
+if(i<message.length){
+document.getElementById("text").innerHTML += message.charAt(i);
+i++;
+setTimeout(typeWriter,40);
+}
+}
+typeWriter();
+
+
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+
+let noScale=1;
+let yesScale=1;
+
+/* YES clicked */
+
+yesBtn.onclick=()=>{
+
+document.body.innerHTML=`
+
+<div style="display:flex;height:100vh;justify-content:center;align-items:center;text-align:center;">
+<h1 style="font-family:'Playfair Display',serif;color:white;font-size:42px;">
+💗 Now Accept my proposal in real life babyy..💗
+</h1>
+</div>
+
+`;
+document.body.style.background="linear-gradient(135deg,#e5989b,#ffc2d1)";
+};
+
+
+/* NO clicked — becomes impossible 😈 */
+
+noBtn.onclick=()=>{
+
+noScale-=0.1;
+if(noScale<0.25) noScale=0.25;
+noBtn.style.transform=`scale(${noScale})`;
+
+yesScale+=0.1;
+yesBtn.style.transform=`scale(${yesScale})`;
+
+const maxX=window.innerWidth-120;
+const maxY=window.innerHeight-60;
+
+noBtn.style.left=Math.random()*maxX+"px";
+noBtn.style.top=Math.random()*maxY+"px";
+
+};
+
+noBtn.style.left="60%";
+noBtn.style.top="65%";
+
+
+/* Floating hearts generator */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+heart.style.animationDuration=(Math.random()*4+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},8000);
+}
+
+setInterval(createHeart,300);
+
+
+/* OPTIONAL MUSIC:
+   If you want background music, add:
+
+   <audio autoplay loop>
+      <source src="your-music.mp3" type="audio/mp3">
+   </audio>
+
+   inside <body>
+*/
+
+</script>
+
+</body>
+</html>
